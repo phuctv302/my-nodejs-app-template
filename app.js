@@ -50,7 +50,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
-app.use(mongoSanitize);
+app.use(mongoSanitize());
 // Data sanitization against XSS
 app.use(xss());
 
