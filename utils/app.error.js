@@ -1,3 +1,7 @@
+/**
+ * @brief App Error Class
+ * @extends Error
+ */
 class AppError extends Error {
     constructor(message, statusCode){
         super(message)

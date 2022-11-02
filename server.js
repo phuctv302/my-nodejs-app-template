@@ -1,3 +1,7 @@
+/**
+ * @brief connect to db, config env and listen to port
+ */
+
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 

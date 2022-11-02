@@ -1,4 +1,9 @@
-const AppError = require('../utils/appError');
+/**
+ * @brief all errors will be sent to here and then sent to client
+ */
+
+const AppError = require('../utils/app.error');
+const AppUtils = require('../utils/app.utils')
 
 // Send error for dev
 const sendErrorDev = (err, req, res) => {
@@ -57,6 +62,9 @@ const sendErrorProd = (err, req, res) => {
 module.exports = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
+
+	// write error to log
+	AppUtils.writeErrorLog(err);
 
     if (process.env.NODE_ENV === 'development') {
         sendErrorDev(err, req, res);

@@ -10,8 +10,8 @@ const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 
-const AppError = require('./utils/appError');
-const globalErrorHandler = require('./controller/errorController');
+const AppError = require('./utils/app.error');
+const globalErrorHandler = require('./controller/error.controller');
 
 const app = express();
 
@@ -21,6 +21,14 @@ const app = express();
  * @desc all request will go through these middleware before reaching server
  *
  */
+
+// Trust proxy -> req.headers['x-forwarded-proto'] set -> can read its value
+app.enable('trust proxy');
+
+// DEFINE VIEW ENGINE - PUG
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
 
 // Allow other websites to access our API
 app.use(cors()); // for get, post
